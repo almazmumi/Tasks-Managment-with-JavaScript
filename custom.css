@@ -132,14 +132,14 @@ li.stickyNotesHideButton{
 
 .header .deleteGroup{
     position: absolute;
-top: 50px;
-right: 10px;
-border: none;
-height: 50px;
-width: 50px;
-color: #fff;
-left: auto;
-cursor: pointer;
+    top: 50px;
+    right: 10px;
+    border: none;
+    height: 50px;
+    width: 50px;
+    color: #ccc;
+    left: auto;
+    cursor: pointer;
 }
 
 .group .footer {
@@ -675,6 +675,10 @@ input[type="checkbox"]{
 
     border-bottom: 3px solid #9b9b9b;
 
+}
+
+.dark .header .deleteGroup{
+    color:#fff
 }
 
 
