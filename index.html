@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, shrink-to-fit=no,minimum-scale=1, maximum-scale=1"">
+    <title>ToDo App</title>
+
+    <style>
+
+    </style>
+
+    <link href=" custom.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body class="">
+    <ul class="navbar">
+        <li>DOIT</li>
+        <li class="stickyNotesShowButton" data-id="0" onclick="showStickyNotesFunction(this)">Sticky Notes</li>
+        <li class="darkModeButton" data-id="0" onclick="toggleDarkMode()"><i class="fa fa-lightbulb-o"
+                aria-hidden="true"></i></li>
+
+    </ul>
+
+    <div class="groups">
+        <div id="deleteZone">
+            <p>Drop here to delete</p>
+        </div>
+
+        <div class="group addNewGroup" onclick="createNewGroup()">
+            <p>+</p>
+        </div>
+
+    </div>
+    <div id="sCanvas" class="StickyNotesCanvas">
+        <div class="stickyNotesInstructions">
+            <p>Press <span>DCLK</span> to create a new note, <span>CTRL</span> to move the note</p>
+        </div>
+    </div>
+
+    <style>
+
+    </style>
+
+    <script src="main.js"></script>
+
+    <!-- OLD CODE -->
+    <!-- <script>
+        let months = ['Jun', 'Feb', "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+        let groups = [
+            {
+                id: 0,
+                name: "Flex Courses",
+                tasks:[
+                    {
+                        id:0,
+                        name: "JavaScript Course",
+                        date: "16,May",
+                        isChecked: true
+                    },
+                    {
+                        id:1,
+                        name: "Linux Course",
+                        date: "28,May",
+                        isChecked: false
+                    }
+                ],
+                numberOcCompletedTask: function(){
+                    let count = 0;
+                    
+                    this.tasks.forEach((el)=>{count = el.isChecked?count+1:count})
+
+                    return count;
+                },
+                numberOfAllTasks: function(){
+                    let count = 0;
+                    this.tasks.forEach((el)=>{count = el != null?count+1:count})                    
+                    return  count;
+                },
+                progressPrecentage: function(){
+                    let count = 0;
+                    this.tasks.forEach((el)=>{count = el != null?count+1:count})
+                    return this.numberOcCompletedTask() / count;
+                },
+                pushTask: function(task){
+                    task.id = this.tasks.length+1;
+                    this.tasks.push(task);
+                    return task;
+                }
+            },
+            {
+                id:1,
+                name: "Live Activities",
+                tasks:[
+                    {
+                        id:0,
+                        name: "Swimming",
+                        date: "16,May",
+                        isChecked: true
+                    },
+                    {
+                        id:1,
+                        name: "Reading",
+                        date: "28,Jan",
+                        isChecked: false
+                    },
+                    {
+                        id:2,
+                        name: "Coding",
+                        date: "28,Sep",
+                        isChecked: true
+                    }
+                ],
+
+                numberOcCompletedTask: function(){
+                    let count = 0;
+                    this.tasks.forEach((el)=>{count = el.isChecked?count+1:count})
+                    return count;
+                },
+                numberOfAllTasks: function(){
+                    let count = 0;
+                    this.tasks.forEach((el)=>{count = el != null?count+1:count})                    
+                    return  count;
+                },
+                progressPrecentage: function(){
+                    let count = 0;
+                    this.tasks.forEach((el)=>{count = el != null?count+1:count})                    
+                    return this.numberOcCompletedTask() / count;
+                },
+                pushTask: function(task){
+                    task.id = this.tasks.length+1;
+                    this.tasks.push(task);
+                    return task;
+                }
+            }
+        ];
+
+
+        // Make Group Element  
+        function makeGroupElement(specificGroup){
+            let groupElement = document.createElement('div');
+            groupElement.className = 'group'
+            groupElement.id = specificGroup.id
+            groupElement.dataset['groupId'] = specificGroup.id
+            let numberOfCompletedTasks = groups[specificGroup.id].numberOcCompletedTask();
+            let numberofAllTasks = groups[specificGroup.id].tasks.length;
+            let precentage = numberOfCompletedTasks/numberofAllTasks;
+            
+            groupElement.innerHTML = `
+            <div class="header">
+                <h1>${specificGroup.name}</h1>
+                <h5>${specificGroup.tasks.length} Tasks</h5>
+                <span class="progress"></span>
+            </div>
+            <div class="content">
+                <input class="textInput" type="text" placeholder="Enter your task and press enter">
+            </div>
+            <div class="footer">
+                <p>${specificGroup.numberOcCompletedTask()} Tasks Completed</p>
+            </div>`;
+
+            specificGroup.tasks.forEach(element => {
+                groupElement.querySelector('.content').appendChild(makeTaskElement(element, specificGroup.id))
+            });
+
+            groupElement.querySelector(".header .progress").style.width = specificGroup.progressPrecentage()
+            groupElement.onkeyup = enterNewTask;
+            groupElement.onchange = changeCompletedTasks;
+            groupElement.onmousemove = enableDragging;
+            groupElement.onmouseleave = disableDragging;
+            groupElement.ondragover = dragOverFunction;
+            groupElement.ondrop = dragDropFunction;
+            return groupElement;
+        }
+
+
+        // Make Task Element
+        function makeTaskElement(specificTask, specificGroupID){
+            taskElement =  document.createElement("div")
+            taskElement.className = "task"
+            taskElement.id = `g${specificGroupID}t${specificTask.id}`
+            // taskElement.setAttribute("draggable", "true")
+            
+            taskElement.dataset['taskId'] = specificTask.id
+            taskElement.innerHTML = `
+            <lable>
+                <input class="checkboxTask" type="checkbox">
+                <span class="checkboxSpan"></span>
+            </lable>
+            <input type="text" value="${specificTask.name}">
+            <p>${specificTask.date.split(",")[0]} ${specificTask.date.split(",")[1]}</p>`;  
+            
+            if(specificTask.isChecked){
+                taskElement.querySelector("input[type='checkbox']").checked = "true"
+                taskElement.querySelector("input[type='text']").style.textDecoration = "line-through"
+            }
+            taskElement.ondragstart = dragStartFunction
+            return taskElement;
+        }
+
+
+        // Append all grops to div.groups
+        groups.forEach(element => {
+            let groupsDiv = document.querySelectorAll(".groups")[0];
+            groupsDiv.appendChild(makeGroupElement(element))
+        });
+
+        
+        // Enter New Task
+        let idCount = 20;
+        function enterNewTask(e){
+            
+            if(e.key == "Enter" ){
+                if(e.target.className != ""){
+                    let d = new Date();
+                    let task = {
+                        id: idCount,
+                        name : e.target.value,
+                        date: `${d.getDate()}, ${months[d.getDay()]}`,
+                        isChecked: false
+                    }
+                    groupID = e.currentTarget.dataset.groupId;
+                    groups[e.currentTarget.dataset.groupId].tasks[idCount++] = task
+                    e.target.parentNode.append(makeTaskElement(task, groupID))
+                    e.target.value = ""
+                    let numberOfTasks = e.currentTarget.querySelectorAll(".content .task").length
+                    e.currentTarget.querySelector(".header h5").innerText = `${numberOfTasks} Tasks`
+                    e.currentTarget.querySelector(".header .progress").style.width = groups[e.currentTarget.dataset.groupId].progressPrecentage()*100 + "%"
+
+                }else{
+                    // Modify the changes
+                }
+            }
+        }
+
+
+        // Change Completed Tasks
+        function changeCompletedTasks(e){
+            if(e.target.className == "checkboxTask"){
+                let footerParagraph = e.currentTarget.querySelector(".footer p")
+                let groupID = e.currentTarget.dataset["groupId"];
+                let taskID = e.target.parentNode.parentNode.dataset["taskId"];
+                                
+                if(e.target.checked){
+                    groups[groupID].tasks[taskID].isChecked = true;
+                    e.target.parentNode.parentNode.querySelector(".task input[type='text']").style.textDecoration = "line-through"
+                    
+                }else{
+                    groups[groupID].tasks[taskID].isChecked = false;
+                    e.target.parentNode.parentNode.querySelector(".task input[type='text']").style.textDecoration = ""
+                }
+
+                let numberOfCompletedTasks = groups[groupID].numberOcCompletedTask();
+                
+                footerParagraph.innerText = `${numberOfCompletedTasks} Tasks Completed`;
+                e.currentTarget.querySelector(".header .progress").style.width = groups[groupID].progressPrecentage()*100 + "%"
+                
+                
+            }    
+            
+        }
+
+        
+        
+        // Delete Task
+
+
+        function enableDragging(e){
+            
+            if(e.target.localName == "input" && e.target.type == "text" && !e.target.classList.contains("textInput")){
+                
+                if(e.ctrlKey){
+                    e.target.parentNode.setAttribute("draggable","true")
+                    if(!e.target.parentNode.classList.contains('draggable')){
+                        e.target.parentNode.classList.add('draggable')
+                    }
+                   
+                }else{
+                    e.target.parentNode.setAttribute("draggable","false")
+                    e.target.parentNode.classList.remove('draggable')
+                }
+            }
+        }
+
+        function disableDragging(e){
+            if(e.target.localName == "input" && e.target.type == "text" && !e.target.classList.contains("textInput")){
+                
+                e.target.parentNode.setAttribute("draggable","false")
+                e.target.parentNode.classList.remove('draggable')
+            }
+        }
+
+
+
+        // Dragging Functionality
+
+        const draggableElements = document.querySelectorAll(".task");
+        const dropableElements = document.querySelectorAll(".group");
+
+        draggableElements.forEach((e)=>{
+            e.ondragstart = dragStartFunction
+        });
+
+        dropableElements.forEach((e)=>{
+            e.ondragover = dragOverFunction;
+            e.ondrop = dragDropFunction;
+        });
+
+        function dragStartFunction(e){
+            e.dataTransfer.setData("target", e.target.id)
+            let droppedElementID = e.dataTransfer.getData("target")
+            let droppedElement = document.getElementById(droppedElementID)
+            console.log(droppedElement);
+            
+        }
+        
+        function dragOverFunction(e){
+            e.preventDefault()
+        }
+
+        function dragDropFunction(e){
+            e.preventDefault()
+            let droppedElementID = e.dataTransfer.getData("target")
+            let droppedElement = document.getElementById(droppedElementID)
+
+            // Remove it From old group
+            let newGroupID = e.currentTarget.dataset.groupId
+            let oldGroupID = droppedElement.id.substring(1,2)
+            let oldTaskID = droppedElement.id.substring(3,4)
+            let oldTask = {};
+            Object.assign(oldTask, groups[oldGroupID].tasks[oldTaskID])
+
+            // Delete task from old group
+            groups[oldGroupID].tasks.splice(oldTaskID,1)
+            let newTask = groups[newGroupID].pushTask(oldTask)
+            updateSpecificGroupInformation(oldGroupID)
+            updateSpecificGroupInformation(newGroupID)
+
+            // Add it to the new group
+            // Update the interface
+            // Change its ID
+            droppedElement.id = `g${e.currentTarget.dataset.groupId}t${newTask.id}`
+            droppedElement.dataset.taskId = newTask.id
+            e.currentTarget.querySelector('.content').appendChild(droppedElement)
+        }
+
+        function updateSpecificGroupInformation(specificGroupID){
+            const groupElement = document.getElementById(specificGroupID)
+            // console.log(`GROUPID ${specificGroupID}`, groups[specificGroupID].numberOfAllTasks());
+            // console.log(`GROUPID ${specificGroupID}`, groups[specificGroupID].tasks);
+            // console.log(groupElement.querySelector('.task'))
+            // console.log("--------------------");
+            
+            
+            groupElement.querySelector(".header h5").innerText = `${groups[specificGroupID].numberOfAllTasks()} Tasks`
+        }
+
+
+
+    </script> -->
+</body>
+
+</html>
