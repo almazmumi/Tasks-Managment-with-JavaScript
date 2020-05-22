@@ -1,0 +1,775 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'roboto';
+    color: #333;
+    /* -webkit-transition: all 200ms linear;
+    -moz-transition: all 200ms linear;
+    -ms-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    transition: all 200ms linear; */
+}
+
+.navbar{
+    height: 60px;
+    width: 100vw;
+    background-color: #222;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.navbar li {
+    list-style-type: none;
+    color: #fff;
+    line-height: 30px;
+    padding: 0 20px;
+    height: 30px;
+    margin: 0;
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 5px;
+}
+
+
+li.stickyNotesShowButton{
+    letter-spacing: 0!important;
+    font-size: 15px;
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+li.stickyNotesHideButton{
+    z-index: 100000;
+    letter-spacing: 0!important;
+    font-size: 15px;
+    position: absolute;
+    right: 10px;
+    /* top: 100px; */
+    cursor: pointer;
+}
+
+
+.settings {
+    height: 50px;
+    line-height: 50px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;;
+}
+
+.addGroupForm{
+    display: inline-block;
+}
+
+
+.groups{
+    width:100vw;
+    height: calc(100vh - 80px);
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    vertical-align: top;
+    position: relative;
+}
+
+
+.group{
+    display: inline-block;
+    min-width: 480px;
+    max-width: 480px;
+    border-radius: 8px;
+    margin-right: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    vertical-align: top;
+}
+
+.group:nth-child(2){
+    margin-left: 20px;
+}
+
+.group .header {
+    width: 100%;
+    height: 130px;
+    background: #fff;
+    padding: 30px;
+    border-bottom: 3px solid #e5e5e5;
+    position: relative;
+}
+
+.group .header h1 {
+    font-size: 30px;
+    font-weight: 400;
+    color: #333;
+    margin: 0;
+}
+
+.group .header h5{
+    font-weight: 300;
+    font-size: 18px;
+    margin: 15px 0 0 0;
+}
+
+.header span {
+    width: 50%;
+    content: "";
+    height: 2px;
+    /*! background-color: #08f; */
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    border-bottom: 3px solid #76bf5b;
+    
+}
+
+.header .deleteGroup{
+    position: absolute;
+top: 50px;
+right: 10px;
+border: none;
+height: 50px;
+width: 50px;
+color: #fff;
+left: auto;
+cursor: pointer;
+}
+
+.group .footer {
+    padding: 30px;
+    text-align: center;
+    background-color: #fefeff;
+    background-color: #fff;
+    padding: 15px;
+}
+
+.group .footer p {
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+}
+
+
+
+.group .content {
+    position: relative;
+    max-height: 600px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    /* Scroll Bar for firefox */
+    scrollbar-width: thin;
+}
+
+
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.content::-webkit-scrollbar {
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+/* Hide scrollbar for IE and Edge */
+.content {
+    -ms-overflow-style: none;
+} 
+
+
+
+.group .content input {
+    border: none;
+    border-bottom: 1px solid #eef3f8;
+    height: 85px;
+    width: 100%;
+    padding: 30px 30px 30px 80px;
+    font-size: 20px;
+    letter-spacing: 0.4px;
+    color: #7e7e99;
+}
+
+.group .content::after {
+    content: '+';
+    position: absolute;
+    top: 30px;
+    font-size: 40px;
+    font-weight: 300;
+    color: #babac8;
+    left: 30px;
+    line-height: 0.6;
+    height: 24px;
+    width: 24px;
+}
+
+
+
+
+.group.addNewGroup {
+	height: 130px;
+	border-radius: 4px;
+	border: none;
+	background-color: #76bf5b;
+    box-shadow: 2px 2px 4px #bbb;
+    cursor: pointer;
+    position: relative;
+}
+
+
+.group.addNewGroup:hover {
+	box-shadow: 2px 2px 10px #bbb;
+}
+
+.group.addNewGroup p{
+    line-height: 130px;
+    text-align: center;
+    font-size: 30px;
+    color: #fff;
+    left: 30px;
+    position: absolute;
+
+}
+
+.group.addNewGroup p:after {
+    content: " Add New Group";
+    opacity: 1;
+    width: 1px;
+    position: absolute;
+    transition: 400ms ease-in-out;
+    display: inline-block;
+    margin-left: 20px;
+}
+.group.addNewGroup:hover p{
+    position: absolute;
+    left: 30px;
+}
+
+.group.addNewGroup:hover p:after {
+    opacity: 1;
+    position: absolute;
+}
+
+.task{
+    width: 100px;
+    height: 85px;
+    position: relative;
+    width: 100%;
+}
+
+
+.task p{
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    right: 30px;
+    top: 32px;
+}
+
+.task span.checkboxSpan{
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    transition: all 200ms linear;
+}
+
+.task span.checkboxSpan::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #d6d6e4;
+    background-color: #fff;
+}
+
+.task span.checkboxSpan::after {
+    content: '';
+    display: block;
+    top: 33px;
+    left: 38px;
+    width: 6px;
+    height: 12px;
+    border-bottom: 2px solid #fff;
+    border-right: 2px solid #fff;
+    position: absolute;
+    pointer-events: none;
+    -moz-transform: scale(0.6, 0.6) rotate(45deg);
+    -ms-transform: scale(0.6, 0.6) rotate(45deg);
+    -webkit-transform: scale(0.6, 0.6) rotate(45deg);
+    transform: scale(0.6, 0.6) rotate(45deg);
+}
+
+
+
+.task input[type="checkbox"]:checked + span.checkboxSpan::before{
+    border: 2px solid #fb6f70;
+    background-color: #fb6f70!important;
+
+
+}
+
+.task input[type="checkbox"]:checked + span::after{
+    -moz-transform: scale(1, 1) rotate(45deg);
+    -ms-transform: scale(1, 1) rotate(45deg);
+    -webkit-transform: scale(1, 1) rotate(45deg);
+    transform: scale(1, 1) rotate(45deg);
+}
+
+.task p{
+    letter-spacing: 0.4px;
+    color: #7e7e99;
+}
+
+.task span.deleteButton{
+    right: 10px;
+    position: absolute;
+    
+
+}
+
+input[type="checkbox"]{
+    top: 30px;
+    position: absolute;
+    left: 30px;
+    width: 1000px;
+    z-index: 1;
+    opacity: 0;
+    cursor: pointer;
+    width: 26px!important;
+    height: 26px!important;
+}
+
+.task input[type="text"]{
+    border: none;
+    outline: none;
+}
+
+.draggable{
+    cursor: pointer!important;
+}
+
+.draggable input{
+    cursor: pointer;
+    /* pointer-events: none; */
+}
+
+
+#deleteZone{
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    height: 500px;
+    width: 100%;
+    color: #fff;
+    display: flex;
+    justify-content:center;
+    align-items: flex-end;
+    z-index: 0;
+}
+
+#deleteZone p{
+    color: #fff;
+    margin-bottom: 25px;
+    font-size: 28px;
+    display: none;
+}
+
+#deleteZone.show{
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(238,238,238,0.4) 62%);
+    display: flex;
+}
+#deleteZone.show p{
+    display: block;
+    color: #999;
+}
+
+
+
+
+.header input {
+    padding: 4px 0 4px 12px;
+    font-size: 25px;
+    border: none;
+    border-left: 2px solid #ccc;
+    color: #555;
+}
+
+
+.header.edit::after {
+    content: "Enter";
+    position: absolute;
+    top: 45px;
+    right: 40px;
+    color: #ccc;
+}
+
+
+.StickyNotesCanvas.showCanvas{
+
+    display: block;
+    
+}
+
+.StickyNotesCanvas{
+    background-color: rgba(0, 0, 0, 0.9);
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom: 0;
+    display: none;
+}
+.sticky{
+    width: 200px;
+    height: 200px;
+    background-color: #76bf5b;
+
+    position: absolute;
+
+
+    -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);
+    /* Safari+Chrome */
+    -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+    /* Opera */
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+
+
+    transform: rotate3d(0deg,5deg,7deg);
+
+}
+
+.StickyNotesCanvas :nth-child(even) .sticky{
+    -o-transform:rotate(4deg);
+    -webkit-transform:rotate(4deg);
+    -moz-transform:rotate(4deg);
+    transform:rotate(4deg);
+
+}
+.StickyNotesCanvas:nth-child(3n) .sticky{
+    -o-transform:rotate(-3deg);
+    -webkit-transform:rotate(-3deg);
+    -moz-transform:rotate(-3deg);
+    transform:rotate(-3deg);
+
+
+}
+.StickyNotesCanvas:nth-child(5n) .sticky{
+    -o-transform:rotate(5deg);
+    -webkit-transform:rotate(5deg);
+    -moz-transform:rotate(5deg);
+    transform:rotate(5deg);
+
+
+}
+
+
+.darkModeButton{
+    position: absolute;
+    left:30px;
+    cursor: pointer;
+    
+}
+
+.darkModeButton i{
+    color:#fff
+}
+
+
+
+
+
+
+
+
+
+
+.sticky {
+    top: 40px;
+    left: 40px;
+    width: auto;
+    height: auto;
+    background-color: #ffff88;
+}
+
+
+.noteHeader {
+    padding: 10px;
+    cursor: move;
+}
+
+
+.noteHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+}
+
+.color,
+.decreaseFontSize,
+.increaseFontSize,
+.deleteNote {
+    cursor: pointer;
+}
+
+
+.fontControl button {
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+}
+
+.fontControl button:nth-child(1) {
+    margin-right: 10px;
+}
+
+
+.color {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: 20px;
+    background-color: tomato;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-right: 2px;
+}
+
+.color:nth-child(1) {
+    background-color: #c7fbc7;
+}
+
+.color:nth-child(2) {
+    background-color: #ffff88;
+}
+
+.color:nth-child(3) {
+    background-color: #ffcccc;
+}
+
+.color:nth-child(4) {
+    background-color: #ffffff;
+}
+
+.noteInput {
+    height: 100%;
+}
+
+.noteInput textarea {
+    width: 100%;
+    height: calc(100% - 40px);
+    background-color: transparent;
+    padding: 10px;
+    /* line-height: 1.2rem; */
+    border: none;
+}
+
+.saveChanges {
+    cursor: pointer;
+    margin-left: 10px;
+    margin-left: 25px;
+    font-size: 12px;
+    display: none;
+}
+
+.saveChanges::after {
+    position: absolute;
+    left: 10px;
+    bottom: 5px;
+    background-color: black;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    color: transparent;
+    cursor: pointer;
+    margin-left: 10px;
+    margin: 0;
+    margin-top: 0px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-top: 10px;
+    content: "";
+}
+
+
+.noteDate {
+    height: 17px;
+}
+
+
+
+/* Dark Styles */
+.dark{
+    background-color: #121212;
+}
+
+
+.dark .group .header, .footer{
+    background-color: #424242;
+    
+}
+
+.dark .group .header h1, .dark .group .header h5{
+    color: #fff;
+}
+
+.dark .group.addNewGroup {
+    box-shadow: rgba(0,0,0,0.4);
+}
+
+
+
+
+
+
+.dark .navbar{
+    background-color: #424242;
+}
+
+
+.dark .group.addNewGroup {
+    box-shadow: rgba(0,0,0,0.4);
+    box-shadow: 2px 2px 4px #020202;
+}
+
+.dark .group .header, .dark .group .footer {
+    background-color: #303030;
+}
+
+
+.dark .group .content input {
+    color: #d9d9d9;
+    background-color: #424242;
+    border-bottom: 1px solid #4a4949;
+}
+
+.dark .task input[type="text"]{
+    border-bottom: none
+}
+.dark .task p {
+
+    color: #a6a6a6;
+}
+
+
+.dark .group .content::after {
+    color: #acacac;
+
+}
+
+
+.dark .group .header {
+
+    border-bottom: 3px solid #9b9b9b;
+
+}
+
+
+.dark #deleteZone.show {
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgb(18, 18, 18) 0%, rgb(0, 0, 0) 62%);
+
+}
+
+
+
+.dark .task span.checkboxSpan::before {
+    border: 2px solid #fff;
+    background-color: #424242;
+}
+
+
+.dark .task span.checkboxSpan::after {
+    border-bottom: 2px solid #424242;
+    border-right: 2px solid #424242;
+}
+
+.dark .task input[type="checkbox"]:checked + span.checkboxSpan::before {
+    border: 2px solid #fff;
+    background-color: #fff !important;
+}
+
+.dark .header input{
+    background-color: transparent;
+    color: #fff
+}
+
+
+.stickyNotesInstructions{
+    position: absolute;
+    bottom: 15px;
+    right: 0;
+    left: 0;
+    pointer-events: none;
+    user-select: none; /* standard syntax */
+    -webkit-user-select: none; /* webkit (safari, chrome) browsers */
+    -moz-user-select: none; /* mozilla browsers */
+    -khtml-user-select: none; /* webkit (konqueror) browsers */
+    -ms-user-select: none; /* IE10+ */
+    
+}
+
+
+.stickyNotesInstructions p span {
+    border: 2px solid #575757;
+    padding: 5px;
+    border-radius: 3px;
+    color: #575757;
+    margin: 0 6px;
+    pointer-events: none;
+}
+
+.stickyNotesInstructions p{
+    text-align: center;
+    color: #c4bebe;
+    letter-spacing: 0.4px;  
+    pointer-events: none; 
+}
+
+
+
+
+
+
+@media all and (max-width: 520px){
+
+    html{
+        height: 100%;
+    }
+    .groups{
+        height: calc(100vh - 80px);
+        /* background-color: #fb6f70; */
+        height: calc((var(--vh, 1vh) * 100) - 90px);
+    }
+    
+    .group{
+        min-width: auto;
+        max-width: auto;
+        width: calc(100vw - 40px);
+        height: calc((var(--vh, 1vh) * 100) - 100px);
+        /* height: calc(100vh - 20px); */
+    }
+
+    .group .content{
+        height: calc(100vh - 80px - 150px - 108px)
+    }
+
+
+
+    .stickyNotesInstructions p{
+        font-size: 10px;
+    }
+}
